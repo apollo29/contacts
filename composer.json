@@ -1,0 +1,28 @@
+{
+  "name": "apollo29/contacts",
+  "description": "contacts module",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Contacts\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "mailchimp/marketing": "*",
+    "parsecsv/php-parsecsv": "^1.2",
+    "ext-mysqli": "*",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "cakephp/database": "^4",
+    "selective/array-reader": "^1.1",
+    "apollo29/csvdb": "^0.0.10"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thomas D'Ascoli",
+      "email": "thomas@dasco.li"
+    }
+  ]
+}
