@@ -113,9 +113,7 @@ class Contacts
         if (isset($exist[0])) {
             throw new \Exception('Existing Record is not an associative array.');
         }
-        if (!isset($exist[0]) && count($exist) > 1) {
-            throw new \Exception("Two much Records to merge, can only merge one: " . count($exist));
-        }
+
         if (count($exist) == 0) {
             return $record->record();
         } else {
