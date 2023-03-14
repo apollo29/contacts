@@ -38,8 +38,12 @@ class Contact implements Data
      *
      * @param array $data The data
      */
-    public function __construct(array $data = [])
+    public function __construct(array $data = [], bool $stripslashes = false)
     {
+        if ($stripslashes) {
+            $data = Mapping::stripslashes($data);
+        }
+
         $reader = new ArrayReader($data);
 
         $this->vorname = $reader->findString('vorname', Mapping::$default_string);
@@ -77,10 +81,7 @@ class Contact implements Data
 
     public static function of(array $data, bool $stripslashes = false): Data
     {
-        if ($stripslashes) {
-            $data = Mapping::stripslashes($data);
-        }
-        return new Contact($data);
+        return new Contact($data, $stripslashes);
     }
 
     public function timestamp(): ?string
