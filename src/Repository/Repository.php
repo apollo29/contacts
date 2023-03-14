@@ -21,6 +21,8 @@ interface Repository
 
     public function delete($index): void;
 
+    public function delete_where(array $where): void;
+
     public function exists($index): array;
 
     // Mapping

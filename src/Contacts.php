@@ -12,6 +12,7 @@ class Contacts
 {
     private Repository $repository;
     private array $sources = array();
+    private array $source_data = array();
     private array $headers;
 
     const NEW = "new";
@@ -53,15 +54,26 @@ class Contacts
         }
     }
 
-    public function load_sources(): array
+    public function load_sources(bool $force = false): array
     {
+        if ($force) {
+            $this->count_sources();
+        }
+        return $this->source_data;
+    }
+
+    public function count_sources(): int
+    {
+        $count = 0;
         $data = array();
         foreach ($this->sources as $source) {
             if ($source instanceof Source) {
+                $count += count($source->load());
                 $data[get_class($source)] = array("name" => $source->name(), "data" => $source->load());
             }
         }
-        return $data;
+        $this->source_data = $data;
+        return $count;
     }
 
     public function index(): string
@@ -85,9 +97,15 @@ class Contacts
         $this->repository->upsert($contact);
     }
 
-    public function delete($index): void
+    public function delete($criterias): void
     {
-        $this->repository->delete($index);
+        if (is_array($criterias)) {
+            foreach ($criterias as $criteria) {
+                $this->repository->delete_where($criteria);
+            }
+        } else {
+            $this->repository->delete($criterias);
+        }
     }
 
     public function delete_source(string $source, $index): void
