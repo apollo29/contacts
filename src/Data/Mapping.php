@@ -22,4 +22,12 @@ class Mapping
     {
         return $val == "x";
     }
+
+    public static function stripslashes(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            $data[$key] = stripslashes($value);
+        }
+        return $data;
+    }
 }

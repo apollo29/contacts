@@ -75,11 +75,13 @@ class Contact implements Data
         return (array)$this;
     }
 
-    public static function of(array $data): Data
+    public static function of(array $data, bool $stripslashes = false): Data
     {
+        if ($stripslashes) {
+            $data = Mapping::stripslashes($data);
+        }
         return new Contact($data);
     }
-
 
     public function timestamp(): ?string
     {
@@ -88,7 +90,7 @@ class Contact implements Data
 
     public function identifier(): string
     {
-        return $this->name ." ". $this->vorname;
+        return $this->name . " " . $this->vorname;
     }
 
     public function index(): string
