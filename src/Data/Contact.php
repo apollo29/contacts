@@ -49,7 +49,7 @@ class Contact implements Data
         $this->ort = $reader->findString('ort', Mapping::$default_string);
         $this->land = $reader->findString('land', Mapping::$default_string);
         $this->telefon_geschaeftlich = $reader->findString('telefon_geschaeftlich', Mapping::$default_string);
-        $this->telefon = $reader->findString('telefon_geschaeftlich', Mapping::$default_string);
+        $this->telefon = $reader->findString('telefon', Mapping::$default_string);
         $this->mobile = $reader->findString('mobile', Mapping::$default_string);
         $this->email = $reader->findString('email');
         $this->email_2 = $reader->findString('email_2', Mapping::$default_string);
