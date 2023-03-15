@@ -97,6 +97,22 @@ class Contacts
         $this->repository->upsert($contact);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function update(array $records): void
+    {
+        echo "<pre>";
+        /*
+         * create record from $this->headers;
+        foreach ($wheres as $key => $where) {
+            $record = $records[$key];
+            $this->repository->update(Contact::from($record), $where);
+        }
+        */
+        echo "</pre>";
+    }
+
     public function delete($criterias): void
     {
         if (is_array($criterias)) {

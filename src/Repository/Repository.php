@@ -19,6 +19,8 @@ interface Repository
 
     public function upsert(Contact $contact): void;
 
+    public function update(Contact $contact, array $where): void;
+
     public function delete($index): void;
 
     public function delete_where(array $where): void;

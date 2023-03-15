@@ -2,6 +2,8 @@
 
 namespace Contacts;
 
+use Contacts\Helpers\Headers;
+
 class Spreadsheet extends Contacts
 {
     public function data(): string
@@ -15,17 +17,8 @@ class Spreadsheet extends Contacts
         $columns = [];
         foreach ($headers as $title) {
             $column["title"] = $title;
-            $has_tag = stripos(strtolower($title), "tag:");
-            $has_check = stripos(strtolower($title), "check:");
-            $has_prefix = false;
-            if ($has_tag !== false) {
-                $has_prefix = $has_tag;
-            }
-            if ($has_check !== false) {
-                $has_prefix = $has_check;
-            }
-            if ($has_prefix !== false && $has_prefix == 0) {
-                $column["title"] = str_replace(array("Tag:", "Check:", "tag:", "check:"), "", $title);
+            if (Headers::is_checkbox($title)) {
+                $column["title"] = Headers::label($title);
                 $column["type"] = "checkbox";
             }
             $columns[] = $column;

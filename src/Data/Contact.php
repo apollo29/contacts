@@ -49,13 +49,13 @@ class Contact implements Data
         $this->vorname = $reader->findString('vorname', Mapping::$default_string);
         $this->name = $reader->findString('name', Mapping::$default_string);
         $this->strasse = $reader->findString('strasse', Mapping::$default_string);
-        $this->plz = $reader->findString('plz', Mapping::$default_string);
         $this->ort = $reader->findString('ort', Mapping::$default_string);
+        $this->plz = $reader->findString('plz', Mapping::$default_string);
         $this->land = $reader->findString('land', Mapping::$default_string);
         $this->telefon_geschaeftlich = $reader->findString('telefon_geschaeftlich', Mapping::$default_string);
         $this->telefon = $reader->findString('telefon', Mapping::$default_string);
         $this->mobile = $reader->findString('mobile', Mapping::$default_string);
-        $this->email = $reader->findString('email');
+        $this->email = $reader->findString('email', Mapping::$default_string);
         $this->email_2 = $reader->findString('email_2', Mapping::$default_string);
 
         $this->infomail_spontan = $reader->findBool('infomail_spontan', Mapping::$default_bool);
@@ -79,9 +79,45 @@ class Contact implements Data
         return (array)$this;
     }
 
-    public static function of(array $data, bool $stripslashes = false): Data
+    public static function of(array $data, bool $stripslashes = false): Contact
     {
         return new Contact($data, $stripslashes);
+    }
+
+    public static function from(array $data, bool $stripslashes = false): Contact
+    {
+        $mapping = [
+            'vorname' => 'Vorname',
+            'name' => 'Nachname',
+            'strasse' => 'Strasse',
+            'plz' => 'PLZ',
+            'ort' => 'Ort',
+            'land' => 'Land',
+            'telefon_geschaeftlich' => 'Telefon geschäftlich',
+            'telefon' => 'Telefon',
+            'mobile' => 'Mobiltelefon',
+            'email' => 'E-Mail',
+            'email_2' => 'E-Mail 2',
+            'infomail_spontan' => 'Infomail Spontan',
+            'newsletter' => 'Newsletter',
+            'familie' => 'Familie',
+            'freunde' => 'Freunde',
+            'kollegen' => 'Kollegen',
+            'nachbarn' => 'Nachbarn',
+            'wanderleiter' => 'Wanderleiter',
+            'bergsportunternehmen' => 'Bergsportunternehmen',
+            'geschaeftskollegen' => 'Geschäftskollegen',
+            'dienstleister' => 'Dienstleister',
+            'linkedin' => 'linkedin',
+            'unternehmen' => 'Unternehmen',
+            'organisationen' => 'Organisationen'
+        ];
+        $array = array();
+        var_dump($data);
+        foreach ($mapping as $key => $value) {
+            $array[$key] = $data[$value];
+        }
+        return Contact::of($array, $stripslashes);
     }
 
     public function timestamp(): ?string

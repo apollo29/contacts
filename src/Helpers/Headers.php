@@ -12,8 +12,8 @@ class Headers
 
     public static function is_checkbox(string $header): bool
     {
-        $has_tag = stripos($header, "Tag:");
-        $has_check = stripos($header, "Check:");
-        return $has_tag === 0 || $has_check === 0;
+        $has_tag = Str::starts_with($header, "Tag:");
+        $has_check = Str::starts_with($header, "Check:");
+        return $has_tag == true || $has_check == true;
     }
 }
