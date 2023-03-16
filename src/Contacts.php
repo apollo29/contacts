@@ -4,6 +4,7 @@ namespace Contacts;
 
 use Contacts\Data\Contact;
 use Contacts\Data\Data;
+use Contacts\Data\Mapping;
 use Contacts\Data\Merge;
 use Contacts\Repository\Repository;
 use Contacts\Source\Source;
@@ -102,15 +103,11 @@ class Contacts
      */
     public function update(array $records): void
     {
-        echo "<pre>";
-        /*
-         * create record from $this->headers;
-        foreach ($wheres as $key => $where) {
-            $record = $records[$key];
-            $this->repository->update(Contact::from($record), $where);
+        foreach ($records as $record) {
+            $array = Mapping::with($record, $this->headers);
+            $contact = Contact::from($array);
+            $this->repository->update($contact, [["email" => $contact->email], ["mobile" => $contact->mobile], ["telefon" => $contact->telefon]]);
         }
-        */
-        echo "</pre>";
     }
 
     public function delete($criterias): void

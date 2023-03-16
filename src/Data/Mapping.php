@@ -38,8 +38,7 @@ class Mapping
             foreach ($where as $stmt) {
                 $map[] = self::map_where_stmt($stmt, $mapping_columns);
             }
-        }
-        else {
+        } else {
             $map = self::map_where_stmt($where, $mapping_columns);
         }
         return $map;
@@ -52,5 +51,18 @@ class Mapping
             $map[$mapping_columns[$key]] = $value;
         }
         return $map;
+    }
+
+    public static function with(array $data, array $header): array
+    {
+        if (count($data) != count($header)) {
+            throw new \Exception('Data and Header are not of identical size. Given: ' . count($header) . ', expected: ' . count($data));
+        }
+
+        $array = array();
+        for ($i = 0; $i < count($header); $i++) {
+            $array[$header[$i]] = $data[$i];
+        }
+        return $array;
     }
 }

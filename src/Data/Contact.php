@@ -98,22 +98,21 @@ class Contact implements Data
             'mobile' => 'Mobiltelefon',
             'email' => 'E-Mail',
             'email_2' => 'E-Mail 2',
-            'infomail_spontan' => 'Infomail Spontan',
-            'newsletter' => 'Newsletter',
-            'familie' => 'Familie',
-            'freunde' => 'Freunde',
-            'kollegen' => 'Kollegen',
-            'nachbarn' => 'Nachbarn',
-            'wanderleiter' => 'Wanderleiter',
-            'bergsportunternehmen' => 'Bergsportunternehmen',
-            'geschaeftskollegen' => 'Geschäftskollegen',
-            'dienstleister' => 'Dienstleister',
-            'linkedin' => 'linkedin',
-            'unternehmen' => 'Unternehmen',
-            'organisationen' => 'Organisationen'
+            'infomail_spontan' => 'Check:Infomail Spontan',
+            'newsletter' => 'Check:Newsletter',
+            'familie' => 'Tag:Familie',
+            'freunde' => 'Tag:Freunde',
+            'kollegen' => 'Tag:Kollegen',
+            'nachbarn' => 'Tag:Nachbarn',
+            'wanderleiter' => 'Tag:Wanderleiter',
+            'bergsportunternehmen' => 'Tag:Bergsportunternehmen',
+            'geschaeftskollegen' => 'Tag:Geschäftskollegen',
+            'dienstleister' => 'Tag:Dienstleister',
+            'linkedin' => 'Tag:linkedin',
+            'unternehmen' => 'Tag:Unternehmen',
+            'organisationen' => 'Tag:Organisationen'
         ];
         $array = array();
-        var_dump($data);
         foreach ($mapping as $key => $value) {
             $array[$key] = $data[$value];
         }
