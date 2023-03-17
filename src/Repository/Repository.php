@@ -29,6 +29,8 @@ interface Repository
 
     // Mapping
 
+    public function mapping_columns(): array;
+
     public function to_data(array $record): array;
 
     public function convert(Data $record): array;
