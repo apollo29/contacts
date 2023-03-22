@@ -69,8 +69,9 @@ class Contacts
         $data = array();
         foreach ($this->sources as $source) {
             if ($source instanceof Source) {
-                $count += count($source->load());
-                $data[get_class($source)] = array("name" => $source->name(), "data" => $source->load());
+                $load = $source->load();
+                $count += count($load);
+                $data[get_class($source)] = array("name" => $source->name(), "data" => $load);
             }
         }
         $this->source_data = $data;
