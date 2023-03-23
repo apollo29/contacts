@@ -6,32 +6,29 @@ use Selective\ArrayReader\ArrayReader;
 
 class Contact implements Data
 {
-    public string $vorname;
     public string $name;
+    public string $vorname;
     public string $strasse;
     public string $plz;
     public string $ort;
-    public string $land;
-    public string $telefon_geschaeftlich;
     public string $telefon;
     public string $mobile;
     public string $email;
-    public string $email_2;
+    public string $geburtstag;
 
     public bool $infomail_spontan;
     public bool $newsletter;
 
-    public bool $familie;
     public bool $freunde;
     public bool $kollegen;
     public bool $nachbarn;
-    public bool $wanderleiter;
+    public bool $blwl;
     public bool $bergsportunternehmen;
     public bool $geschaeftskollegen;
     public bool $dienstleister;
-    public bool $linkedin;
-    public bool $unternehmen;
-    public bool $organisationen;
+    public bool $basket;
+    public bool $mpa;
+    public bool $sac_birehubel;
 
     /**
      * The constructor.
@@ -46,32 +43,28 @@ class Contact implements Data
 
         $reader = new ArrayReader($data);
 
-        $this->vorname = $reader->findString('vorname', Mapping::$default_string);
         $this->name = $reader->findString('name', Mapping::$default_string);
+        $this->vorname = $reader->findString('vorname', Mapping::$default_string);
         $this->strasse = $reader->findString('strasse', Mapping::$default_string);
-        $this->ort = $reader->findString('ort', Mapping::$default_string);
         $this->plz = $reader->findString('plz', Mapping::$default_string);
-        $this->land = $reader->findString('land', Mapping::$default_string);
-        $this->telefon_geschaeftlich = $reader->findString('telefon_geschaeftlich', Mapping::$default_string);
+        $this->ort = $reader->findString('ort', Mapping::$default_string);
         $this->telefon = $reader->findString('telefon', Mapping::$default_string);
-        $this->mobile = $reader->findString('mobile', Mapping::$default_string);
         $this->email = $reader->findString('email', Mapping::$default_string);
-        $this->email_2 = $reader->findString('email_2', Mapping::$default_string);
+        $this->geburtstag = $reader->findString('geburtstag', Mapping::$default_string);
 
         $this->infomail_spontan = $reader->findBool('infomail_spontan', Mapping::$default_bool);
         $this->newsletter = $reader->findBool('newsletter', Mapping::$default_bool);
 
-        $this->familie = $reader->findBool('familie', Mapping::$default_bool);
         $this->freunde = $reader->findBool('freunde', Mapping::$default_bool);
         $this->kollegen = $reader->findBool('kollegen', Mapping::$default_bool);
         $this->nachbarn = $reader->findBool('nachbarn', Mapping::$default_bool);
-        $this->wanderleiter = $reader->findBool('wanderleiter', Mapping::$default_bool);
+        $this->blwl = $reader->findBool('blwl', Mapping::$default_bool);
         $this->bergsportunternehmen = $reader->findBool('bergsportunternehmen', Mapping::$default_bool);
         $this->geschaeftskollegen = $reader->findBool('geschaeftskollegen', Mapping::$default_bool);
         $this->dienstleister = $reader->findBool('dienstleister', Mapping::$default_bool);
-        $this->linkedin = $reader->findBool('linkedin', Mapping::$default_bool);
-        $this->unternehmen = $reader->findBool('unternehmen', Mapping::$default_bool);
-        $this->organisationen = $reader->findBool('organisationen', Mapping::$default_bool);
+        $this->basket = $reader->findBool('basket', Mapping::$default_bool);
+        $this->mpa = $reader->findBool('mpa', Mapping::$default_bool);
+        $this->sac_birehubel = $reader->findBool('sac_birehubel', Mapping::$default_bool);
     }
 
     public function record(): array
@@ -87,30 +80,26 @@ class Contact implements Data
     public static function from(array $data, bool $stripslashes = false): Contact
     {
         $mapping = [
-            'vorname' => 'Vorname',
             'name' => 'Nachname',
+            'vorname' => 'Vorname',
             'strasse' => 'Strasse',
             'plz' => 'PLZ',
             'ort' => 'Ort',
-            'land' => 'Land',
-            'telefon_geschaeftlich' => 'Telefon geschäftlich',
             'telefon' => 'Telefon',
-            'mobile' => 'Mobiltelefon',
-            'email' => 'E-Mail',
-            'email_2' => 'E-Mail 2',
+            'email' => 'E-Mail-Adresse',
+            'geburtstag' => 'Geburtstag',
             'infomail_spontan' => 'Check:Infomail Spontan',
             'newsletter' => 'Check:Newsletter',
-            'familie' => 'Tag:Familie',
             'freunde' => 'Tag:Freunde',
             'kollegen' => 'Tag:Kollegen',
             'nachbarn' => 'Tag:Nachbarn',
-            'wanderleiter' => 'Tag:Wanderleiter',
+            'blwl' => 'Tag:BLWL',
             'bergsportunternehmen' => 'Tag:Bergsportunternehmen',
             'geschaeftskollegen' => 'Tag:Geschäftskollegen',
             'dienstleister' => 'Tag:Dienstleister',
-            'linkedin' => 'Tag:linkedin',
-            'unternehmen' => 'Tag:Unternehmen',
-            'organisationen' => 'Tag:Organisationen'
+            'basket' => 'Tag:Basket',
+            'mpa' => 'Tag:mpa',
+            'sac_birehubel' => 'Tag:SAC Birehubel'
         ];
         $array = array();
         foreach ($mapping as $key => $value) {

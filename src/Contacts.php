@@ -107,7 +107,7 @@ class Contacts
         foreach ($records as $record) {
             $array = Mapping::with($record, $this->headers);
             $contact = Contact::from($array);
-            $this->repository->update($contact, [["email" => $contact->email], ["mobile" => $contact->mobile], ["telefon" => $contact->telefon]]);
+            $this->repository->update($contact, [["email" => $contact->email], ["telefon" => $contact->telefon]]);
         }
     }
 
