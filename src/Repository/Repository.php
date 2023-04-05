@@ -3,35 +3,37 @@
 namespace Contacts\Repository;
 
 use Contacts\Data\Contact;
-use Contacts\Data\Data;
+use Contacts\Data\MappingTrait;
 
-interface Repository
+abstract class Repository
 {
-    public function contacts(): array;
+    use MappingTrait;
 
-    public function history(): array;
+    public abstract function headers(): array;
 
-    public function has_history(): bool;
+    public abstract function contacts(): array;
 
-    public function index(): string;
+    public abstract function history(): array;
+
+    public abstract function has_history(): bool;
+
+    public abstract function index(): string;
+
+    public abstract function data_types(): array;
 
     // CRUD
 
-    public function upsert(Contact $contact): void;
+    public abstract function upsert(Contact $contact): void;
 
-    public function update(Contact $contact, array $where): void;
+    public abstract function update(Contact $contact, array $where): void;
 
-    public function delete($index): void;
+    public abstract function delete($index): void;
 
-    public function delete_where(array $where): void;
+    public abstract function delete_where(array $where): void;
 
-    public function exists($index): array;
+    public abstract function exists($index): array;
 
     // Mapping
 
-    public function mapping_columns(): array;
-
-    public function to_data(array $record): array;
-
-    public function convert(Data $record): array;
+    public abstract function mapping_columns(): array;
 }

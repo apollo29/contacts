@@ -16,7 +16,7 @@
     "ext-pdo": "*",
     "cakephp/database": "^4",
     "selective/array-reader": "^1.1",
-    "apollo29/csvdb": "^0.0.17",
+    "apollo29/csvdb": "^0.0.23",
     "ext-zip": "*"
   },
   "license": "MIT",

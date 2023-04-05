@@ -14,26 +14,29 @@ class Contacts
     private Repository $repository;
     private array $sources = array();
     private array $source_data = array();
-    private array $headers;
 
     const NEW = "new";
     const UPDATE = "update";
     const DELETE = "delete";
 
-    public function __construct(Repository $repository, array $headers)
+    public function __construct(Repository $repository)
     {
         $this->repository = $repository;
-        $this->headers = $headers;
-    }
-
-    public function headers(): array
-    {
-        return $this->headers;
     }
 
     public function contacts(): array
     {
         return $this->repository->contacts();
+    }
+
+    public function headers(): array
+    {
+        return $this->repository->headers();
+    }
+
+    public function data_types(): array
+    {
+        return $this->repository->data_types();
     }
 
     public function history(): array
@@ -76,6 +79,17 @@ class Contacts
         }
         $this->source_data = $data;
         return $count;
+    }
+
+    public function sources_headers(): array
+    {
+        $data = array();
+        foreach ($this->sources as $source) {
+            if ($source instanceof Source) {
+                $data[get_class($source)] = $source->headers();
+            }
+        }
+        return $data;
     }
 
     public function index(): string
@@ -152,5 +166,10 @@ class Contacts
             $contact = $this->repository->to_data($exist);
             return Merge::merge($record, $contact);
         }
+    }
+
+    public function contact_headers(): array
+    {
+        return array_keys(get_class_vars(Contact::class));
     }
 }

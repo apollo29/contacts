@@ -12,7 +12,6 @@ class Contact implements Data
     public string $plz;
     public string $ort;
     public string $telefon;
-    public string $mobile;
     public string $email;
     public string $geburtstag;
 
@@ -88,18 +87,18 @@ class Contact implements Data
             'telefon' => 'Telefon',
             'email' => 'E-Mail-Adresse',
             'geburtstag' => 'Geburtstag',
-            'infomail_spontan' => 'Check:Infomail Spontan',
-            'newsletter' => 'Check:Newsletter',
-            'freunde' => 'Tag:Freunde',
-            'kollegen' => 'Tag:Kollegen',
-            'nachbarn' => 'Tag:Nachbarn',
-            'blwl' => 'Tag:BLWL',
-            'bergsportunternehmen' => 'Tag:Bergsportunternehmen',
-            'geschaeftskollegen' => 'Tag:Geschäftskollegen',
-            'dienstleister' => 'Tag:Dienstleister',
-            'basket' => 'Tag:Basket',
-            'mpa' => 'Tag:mpa',
-            'sac_birehubel' => 'Tag:SAC Birehubel'
+            'infomail_spontan' => 'Infomail Spontan',
+            'newsletter' => 'Newsletter',
+            'freunde' => 'Freunde',
+            'kollegen' => 'Kollegen',
+            'nachbarn' => 'Nachbarn',
+            'blwl' => 'BLWL',
+            'bergsportunternehmen' => 'Bergsportunternehmen',
+            'geschaeftskollegen' => 'Geschäftskollegen',
+            'dienstleister' => 'Dienstleister',
+            'basket' => 'Basket',
+            'mpa' => 'mpa',
+            'sac_birehubel' => 'SAC Birehubel'
         ];
         $array = array();
         foreach ($mapping as $key => $value) {
