@@ -11,34 +11,27 @@ trait MappingTrait
     public static int $default_int = 0;
     public static bool $default_bool = false;
 
-    public function to_record(Data $data): array
+    public function to_record(array $data, array $mapping_columns = null): array
     {
-        $reader = new ArrayReader($data->record());
+        $reader = new ArrayReader($data);
         $headers = $this->data_types();
-        $mapping = $this->reverse_mapping_columns();
+        $mapping = $mapping_columns ?: $this->reverse_mapping_columns();
         $record = array();
         foreach ($headers as $key => $type) {
-            $record[$key] = $this->find($reader, $mapping[$key], $type, false);
+            if (array_key_exists($key, $mapping)) {
+                $record[$key] = $this->find($reader, $mapping[$key], $type, false);
+            } else {
+                $record[$key] = "";
+            }
         }
         return $record;
     }
 
-    public function to_data(array $record): array
+    private function reverse_mapping_columns(array $mapping_columns = null): array
     {
-        $reader = new ArrayReader($record);
-        $headers = $this->data_types();
-        $mapping = $this->reverse_mapping_columns();
-        $data = array();
-        foreach ($headers as $key => $type) {
-            $data[$mapping[$key]] = $this->find($reader, $key, $type, true);
-        }
-        return $data;
-    }
-
-    private function reverse_mapping_columns(): array
-    {
+        $columns = $mapping_columns ?: $this->mapping_columns();
         $mapping = array();
-        foreach ($this->mapping_columns() as $key => $value) {
+        foreach ($columns as $key => $value) {
             $mapping[$value] = $key;
         }
         return $mapping;

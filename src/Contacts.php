@@ -99,7 +99,7 @@ class Contacts
 
     // CRUD
 
-    public function upsert_source(Contact $contact, string $source, $index): void
+    public function upsert_source(array $contact, string $source, $index): void
     {
         $this->upsert($contact);
         $repository = $this->sources[$source];
@@ -108,7 +108,7 @@ class Contacts
         }
     }
 
-    public function upsert(Contact $contact): void
+    public function upsert(array $contact): void
     {
         $this->repository->upsert($contact);
     }
@@ -119,9 +119,9 @@ class Contacts
     public function update(array $records): void
     {
         foreach ($records as $record) {
-            $array = Mapping::with($record, $this->headers);
-            $contact = Contact::from($array);
-            $this->repository->update($contact, [["email" => $contact->email], ["telefon" => $contact->telefon]]);
+            $contact = Mapping::with($record, $this->repository->headers());
+            // todo other index when not unique
+            $this->repository->update($contact, [$this->index() => $contact[$this->index()]]);
         }
     }
 
@@ -154,17 +154,16 @@ class Contacts
     /**
      * @throws \Exception
      */
-    public function merge(Data $record, array $exist): array
+    public function merge(Data $record, array $exist, array $mapping_columns): array
     {
         if (isset($exist[0])) {
             throw new \Exception('Existing Record is not an associative array.');
         }
-
+        $contact = $this->repository->to_record($record->record(), $mapping_columns);
         if (count($exist) == 0) {
-            return $record->record();
+            return $contact;
         } else {
-            $contact = $this->repository->to_data($exist);
-            return Merge::merge($record, $contact);
+            return Merge::merge($contact, $exist);
         }
     }
 

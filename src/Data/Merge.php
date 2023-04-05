@@ -10,10 +10,10 @@ class Merge
     /**
      * @throws \Exception
      */
-    public static function merge(Data $record, array $exist): array
+    public static function merge(array $record, array $exist): array
     {
-        $diff = array_diff_assoc($record->record(), $exist);
-        $contact = Mapping::to_data_array($exist);
+        $diff = array_diff_assoc($record, $exist);
+        //$contact = Mapping::to_data_array($exist);
 
         $reader = new ArrayReader($exist);
         foreach ($diff as $key => $value) {

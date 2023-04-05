@@ -3,6 +3,7 @@
 namespace Contacts\Repository;
 
 use Contacts\Data\Contact;
+use Contacts\Data\Data;
 use Contacts\Data\MappingTrait;
 
 abstract class Repository
@@ -23,9 +24,9 @@ abstract class Repository
 
     // CRUD
 
-    public abstract function upsert(Contact $contact): void;
+    public abstract function upsert(array $contact): void;
 
-    public abstract function update(Contact $contact, array $where): void;
+    public abstract function update(array $contact, array $where): void;
 
     public abstract function delete($index): void;
 
