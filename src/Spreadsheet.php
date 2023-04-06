@@ -53,19 +53,22 @@ class Spreadsheet extends Contacts
         return $select;
     }
 
-    public function make_input(string $name, string $label, string $type = "text", string $required = "", string $value = null): string
+    public function make_input(string $name, string $label, string $type = "text", bool $required = false, string $value = null): string
     {
+        $is_required = ($required) ? "required" : "";
         $select = '<div class="form-group w-50">' . "\n";
         $select .= '<label for="' . $name . '">' . $label . '</label>' . "\n";
-        $select .= '<input name="' . $name . '" id="' . $name . '" type="' . $type . '" value="' . $value . '" ' . $required . ' />' . "\n";
+        $select .= '<input name="' . $name . '" id="' . $name . '" type="' . $type . '" value="' . $value . '" ' . $is_required . ' />' . "\n";
         $select .= '</div>' . "\n";
         return $select;
     }
 
-    public function make_checkbox(string $name, string $label, string $required = "", bool $checked = false): string
+    public function make_checkbox(string $name, string $label, bool $required = false, bool $checked = false): string
     {
+        $is_required = ($required) ? "required" : "";
+        $is_checked = ($checked) ? "checked" : "";
         $select = '<div class="form-check form-check-inline">' . "\n";
-        $select .= '<input class="form-check-input" name="' . $name . '" id="' . $name . '" type="checkbox" value="x" ' . $required . '/>' . "\n";
+        $select .= '<input class="form-check-input" name="' . $name . '" id="' . $name . '" type="checkbox" value="x" ' . $is_checked . ' ' . $is_required . '/>' . "\n";
         $select .= '<label for="' . $name . '">' . $label . '</label>' . "\n";
         $select .= '</div>' . "\n";
         return $select;

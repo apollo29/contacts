@@ -14,14 +14,18 @@ class Contacts
     private Repository $repository;
     private array $sources = array();
     private array $source_data = array();
+    private array $data_types;
+    private array $data_required;
 
     const NEW = "new";
     const UPDATE = "update";
     const DELETE = "delete";
 
-    public function __construct(Repository $repository)
+    public function __construct(Repository $repository, array $data_required = array())
     {
         $this->repository = $repository;
+        $this->data_types = $repository->data_types();
+        $this->data_required = $data_required;
     }
 
     public function contacts(): array
@@ -36,7 +40,25 @@ class Contacts
 
     public function data_types(): array
     {
-        return $this->repository->data_types();
+        if (empty($this->data_types)) {
+            $this->update_data_types($this->repository->data_types());
+        }
+        return $this->data_types;
+    }
+
+    public function update_data_types(array $data_types): void
+    {
+        $this->data_types = $data_types;
+    }
+
+    public function data_required(): array
+    {
+        return $this->data_required;
+    }
+
+    public function update_data_required(array $data_required): void
+    {
+        $this->data_required = $data_required;
     }
 
     public function history(): array
@@ -120,7 +142,7 @@ class Contacts
     {
         foreach ($records as $record) {
             $contact = Mapping::with($record, $this->repository->headers());
-            // todo other index when not unique
+            // todo other index when not unique -> required fields ->data_required
             $this->repository->update($contact, [$this->index() => $contact[$this->index()]]);
         }
     }

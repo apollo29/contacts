@@ -2,8 +2,6 @@
 
 namespace Contacts\Repository;
 
-use Contacts\Data\Contact;
-use Contacts\Data\Data;
 use Contacts\Data\MappingTrait;
 
 abstract class Repository

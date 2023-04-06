@@ -13,7 +13,7 @@ class Merge
     public static function merge(array $record, array $exist): array
     {
         $diff = array_diff_assoc($record, $exist);
-        //$contact = Mapping::to_data_array($exist);
+        $contact = $exist;
 
         $reader = new ArrayReader($exist);
         foreach ($diff as $key => $value) {
