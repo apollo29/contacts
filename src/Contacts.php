@@ -4,7 +4,6 @@ namespace Contacts;
 
 use Contacts\Data\Contact;
 use Contacts\Data\Data;
-use Contacts\Data\Mapping;
 use Contacts\Data\Merge;
 use Contacts\Repository\Repository;
 use Contacts\Source\Source;
@@ -20,6 +19,7 @@ class Contacts
     const NEW = "new";
     const UPDATE = "update";
     const DELETE = "delete";
+    const DUMP = "dump";
 
     public function __construct(Repository $repository, array $data_required = array())
     {
@@ -135,16 +135,9 @@ class Contacts
         $this->repository->upsert($contact);
     }
 
-    /**
-     * @throws \Exception
-     */
-    public function update(array $records): void
+    public function dump(string $records): void
     {
-        foreach ($records as $record) {
-            $contact = Mapping::with($record, $this->repository->headers());
-            // todo other index when not unique -> required fields ->data_required
-            $this->repository->update($contact, [$this->index() => $contact[$this->index()]]);
-        }
+        $this->repository->dump($records);
     }
 
     public function delete($criterias): void

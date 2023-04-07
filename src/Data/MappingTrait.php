@@ -21,6 +21,9 @@ trait MappingTrait
             if (array_key_exists($key, $mapping)) {
                 $record[$key] = $this->find($reader, $mapping[$key], $type, false);
             }
+            else {
+                $record[$key] = "";
+            }
         }
         return $record;
     }

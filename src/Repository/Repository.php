@@ -24,13 +24,13 @@ abstract class Repository
 
     public abstract function upsert(array $contact): void;
 
-    public abstract function update(array $contact, array $where): void;
-
     public abstract function delete($index): void;
 
     public abstract function delete_where(array $where): void;
 
     public abstract function exists($index): array;
+
+    public abstract function dump(string $records): void;
 
     // Mapping
 

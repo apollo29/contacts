@@ -9,18 +9,20 @@ class Spreadsheet extends Contacts
         return json_encode($this->contacts());
     }
 
-    public function columns(): string
+    public function columns(): array
     {
         $types = $this->data_types();
         $columns = [];
         foreach ($types as $title => $type) {
-            $column["title"] = $title;
+            $column["data"] = $title;
             if ($type == "boolean") {
                 $column["type"] = "checkbox";
+                $column["checkedTemplate"] = "x";
+                $column["uncheckedTemplate"] = "";
             }
             $columns[] = $column;
         }
-        return json_encode($columns);
+        return $columns;
     }
 
     public function make_select_assoc(array $data, string $name, string $label, string $value = null): string
