@@ -14,8 +14,9 @@ class Spreadsheet extends Contacts
         $types = $this->data_types();
         $columns = [];
         foreach ($types as $title => $type) {
+            unset($column);
             $column["data"] = $title;
-            if ($type == "boolean") {
+            if ($type === "boolean") {
                 $column["type"] = "checkbox";
                 $column["checkedTemplate"] = "x";
                 $column["uncheckedTemplate"] = "";
