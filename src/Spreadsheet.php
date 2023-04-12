@@ -6,7 +6,11 @@ class Spreadsheet extends Contacts
 {
     public function data(): string
     {
-        return json_encode($this->contacts());
+        $contacts = [];
+        foreach ($this->contacts() as $contact) {
+            $contacts[] = array_values($contact);
+        }
+        return json_encode($contacts);
     }
 
     public function columns(): array

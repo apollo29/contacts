@@ -1,0 +1,130 @@
+<?php
+
+
+use Contacts\Data\Mapping;
+use Contacts\Repository\Repository;
+use CSVDB\CSVDB;
+use CSVDB\Helpers\CSVConfig;
+use League\Csv\CannotInsertRecord;
+use League\Csv\Exception;
+use League\Csv\InvalidArgument;
+
+class CSVDBRepository extends Repository
+{
+    private CSVDB $csvdb;
+
+    public function __construct(string $csv, CSVConfig $config)
+    {
+        $this->csvdb = new CSVDB($csv, $config);
+    }
+
+    public function headers(): array
+    {
+        return $this->csvdb->headers();
+    }
+
+    public function contacts(): array
+    {
+        return $this->csvdb->select()->get();
+    }
+
+    public function history(): array
+    {
+        $dir = $this->csvdb->history_dir();
+        $files = scandir($dir, SCANDIR_SORT_DESCENDING);
+        $result = array();
+        foreach ($files as $file) {
+            $result[$file] = $dir . $file;
+        }
+        return $result;
+    }
+
+    public function has_history(): bool
+    {
+        return $this->csvdb->config->history;
+    }
+
+    public function index(): string
+    {
+        return $this->csvdb->index;
+    }
+
+    public function data_types(): array
+    {
+        return $this->csvdb->getDatatypes();
+    }
+
+    // CRUD
+
+    /**
+     * @throws InvalidArgument
+     * @throws CannotInsertRecord
+     * @throws Exception
+     */
+    public function upsert(array $contact): void
+    {
+        $this->csvdb->upsert($this->to_record($contact));
+    }
+
+    /**
+     * @throws InvalidArgument
+     * @throws Exception
+     */
+    public function delete($index): void
+    {
+        $this->csvdb->delete([$this->index() => $index]);
+    }
+
+    /**
+     * @throws InvalidArgument
+     * @throws Exception
+     */
+    public function delete_where(array $where): void
+    {
+        $where_mapped = Mapping::where_stmt($where, $this->mapping_columns());
+        $this->csvdb->delete($where_mapped);
+    }
+
+    public function mapping_columns(): array
+    {
+        // todo
+        return [
+            'Nachname' => 'Nachname',
+            'Vorname' => 'Vorname',
+            'Strasse' => 'Strasse',
+            'PLZ' => 'PLZ',
+            'Ort' => 'Ort',
+            'Telefon' => 'Telefon',
+            'E-Mail-Adresse' => 'E-Mail-Adresse',
+            'Geburtstag' => 'Geburtstag',
+            'Infomail Spontan' => 'Infomail Spontan',
+            'Newsletter' => 'Newsletter',
+            'Freunde' => 'Freunde',
+            'Kollegen' => 'Kollegen',
+            'Nachbarn' => 'Nachbarn',
+            'BLWL' => 'BLWL',
+            'Bergsportunternehmen' => 'Bergsportunternehmen',
+            'Geschäftskollegen' => 'Geschäftskollegen',
+            'Dienstleister' => 'Dienstleister',
+            'Basket' => 'Basket',
+            'mpa' => 'mpa',
+            'SAC Birehubel' => 'SAC Birehubel'
+        ];
+    }
+
+    public function exists($index): array
+    {
+        $exist = $this->csvdb->select()->where([$this->index() => $index])->get();
+        if (!$exist) {
+            return array();
+        }
+        return $exist[0];
+    }
+
+    public function dump(string $records): void
+    {
+        $this->csvdb->dump($records);
+    }
+
+
+}

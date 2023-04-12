@@ -1,0 +1,144 @@
+
+<div id="editor_old" class="overlay">
+    <div class="popup">
+        <h2>Editor</h2>
+        <span class="close" href="#">&times;</span>
+        <form name="editor_form" id="editor_form" method="post">
+            <div class="content">
+                <fieldset>
+                    <legend>Person</legend>
+                    <div class="d-flex">
+                        <div class="form-group w-50">
+                            <label for="name">Name*</label>
+                            <input id="name" name="name" type="text" required/>
+                        </div>
+
+                        <div class="form-group w-50">
+                            <label for="vorname">Vorname*</label>
+                            <input id="vorname" name="vorname" type="text" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="strasse">Strasse</label>
+                        <input id="strasse" name="strasse" type="text"/>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="form-group w-25">
+                            <label for="plz">PLZ</label>
+                            <input id="plz" name="plz" type="number"/>
+                        </div>
+
+                        <div class="form-group w-75">
+                            <label for="ort">Ort</label>
+                            <input id="ort" name="ort" type="text"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group w-25">
+                        <label for="geburtstag">Geburtstag</label>
+                        <input id="geburtstag" name="geburtstag" type="text"/>
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Kontakte</legend>
+
+                    <div class="d-flex">
+                        <div class="form-group w-50">
+                            <label for="telefon">Telefon</label>
+                            <input id="telefon" name="telefon" type="tel"/>
+                        </div>
+
+                        <div class="form-group w-50">
+                            <label for="email">E-Mail*</label>
+                            <input id="email" name="email" type="email" required/>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Newsletter</legend>
+
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input id="infomail_spontan" name="infomail_spontan" class="form-check-input"
+                                   type="checkbox" value="x"/>
+                            <label for="infomail_spontan" class="form-check-label">Infomail Spontan</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="newsletter" name="newsletter" class="form-check-input" type="checkbox"
+                                   value="x"/>
+                            <label for="newsletter" class="form-check-label">Newsletter</label>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Kategorien</legend>
+
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input id="freunde" name="freunde" class="form-check-input" type="checkbox" value="x"/>
+                            <label for="freunde" class="form-check-label">Freunde</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="kollegen" name="kollegen" class="form-check-input" type="checkbox" value="x"/>
+                            <label for="kollegen" class="form-check-label">Kollegen</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="nachbarn" name="nachbarn" class="form-check-input" type="checkbox" value="x"/>
+                            <label for="nachbarn" class="form-check-label">Nachbarn</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="blwl" name="blwl" class="form-check-input" type="checkbox"
+                                   value="x"/>
+                            <label for="blwl" class="form-check-label">BLWL</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="bergsportunternehmen" name="bergsportunternehmen" class="form-check-input"
+                                   type="checkbox" value="x"/>
+                            <label for="bergsportunternehmen" class="form-check-label">Bergsportunternehmen</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="geschaeftskollegen" name="geschaeftskollegen" class="form-check-input"
+                                   type="checkbox" value="x"/>
+                            <label for="geschaeftskollegen" class="form-check-label">Geschäftskollegen</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="dienstleister" name="dienstleister" class="form-check-input" type="checkbox"
+                                   value="x"/>
+                            <label for="dienstleister" class="form-check-label">Dienstleister</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="basket" name="basket" class="form-check-input" type="checkbox" value="x"/>
+                            <label for="basket" class="form-check-label">Basket</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="mpa" name="mpa" class="form-check-input" type="checkbox"
+                                   value="x"/>
+                            <label for="mpa" class="form-check-label">mpa</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input id="sac_birehubel" name="sac_birehubel" class="form-check-input" type="checkbox"
+                                   value="x"/>
+                            <label for="sac_birehubel" class="form-check-label">SAC Birehubel</label>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </div>
+            <div class="action">
+                <input type="hidden" name="editor_form_action" value="new"/>
+                <input type="hidden" name="editor_form_source"/>
+                <input type="hidden" name="editor_form_index"/>
+                <button class="btn btn-primary" type="submit">Speichern</button>
+                <button class="btn btn-light" type="reset">Zurücksetzen</button>
+                <button class="btn btn-dark right editor_form_remove" type="button">Löschen</button>
+            </div>
+        </form>
+    </div>
+</div>
