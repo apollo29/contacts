@@ -174,7 +174,7 @@ class Contacts
         if (isset($exist[0])) {
             throw new \Exception('Existing Record is not an associative array.');
         }
-        $contact = $this->repository->to_record($record->record(), $mapping_columns);
+        $contact = $this->repository->to_record($record->record(), $mapping_columns, true);
         if (count($exist) == 0) {
             return $contact;
         } else {
