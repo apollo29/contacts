@@ -11,7 +11,7 @@ trait MappingTrait
     public static int $default_int = 0;
     public static bool $default_bool = false;
 
-    public function to_record(array $data, array $mapping_columns = null): array
+    public function to_record(array $data, array $mapping_columns = null, bool $diff = false): array
     {
         $reader = new ArrayReader($data);
         $headers = $this->data_types();
@@ -21,7 +21,7 @@ trait MappingTrait
             if (array_key_exists($key, $mapping)) {
                 $record[$key] = $this->find($reader, $mapping[$key], $type, false);
             }
-            else {
+            else if (!$diff) {
                 $record[$key] = "";
             }
         }

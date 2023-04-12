@@ -2,8 +2,6 @@
 
 namespace Contacts\Data;
 
-use Selective\ArrayReader\ArrayReader;
-
 class Merge
 {
 
@@ -14,13 +12,9 @@ class Merge
     {
         $diff = array_diff_assoc($record, $exist);
         $contact = $exist;
-
-        $reader = new ArrayReader($exist);
         foreach ($diff as $key => $value) {
-            if ($reader->exists($key)) {
-                $contact[$key] = $value;
-                $contact["_diff"][$key] = $reader->find($key);
-            }
+            $contact[$key] = $value;
+            $contact["_diff"][$key] = $exist[$key];
         }
         return $contact;
     }
