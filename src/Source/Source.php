@@ -10,7 +10,7 @@ interface Source
 
     public function name(): string;
 
-    public function archive($index): void;
+    public function archive($index, $key = null): void;
 
     public function headers(): array;
 }

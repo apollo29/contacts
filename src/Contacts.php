@@ -121,12 +121,12 @@ class Contacts
 
     // CRUD
 
-    public function upsert_source(array $contact, string $source, $index): void
+    public function upsert_source(array $contact, string $source, $index, $key = null): void
     {
         $this->upsert($contact);
         $repository = $this->sources[$source];
         if ($repository instanceof Source) {
-            $repository->archive($index);
+            $repository->archive($index, $key);
         }
     }
 
@@ -151,11 +151,11 @@ class Contacts
         }
     }
 
-    public function delete_source(string $source, $index): void
+    public function delete_source(string $source, $index, $key = null): void
     {
         $repository = $this->sources[$source];
         if ($repository instanceof Source) {
-            $repository->archive($index);
+            $repository->archive($index, $key);
         }
     }
 
