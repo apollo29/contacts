@@ -61,7 +61,10 @@ class Spreadsheet extends Contacts
         $is_required = ($required) ? "required" : "";
         $select = '<div class="form-group w-50">' . "\n";
         $select .= '<label for="' . $name . '">' . $label . '</label>' . "\n";
+        $select .= '<div class="input--button">' . "\n";
         $select .= '<input name="' . $name . '" id="' . $name . '" type="' . $type . '" value="' . $value . '" ' . $is_required . ' />' . "\n";
+        $select .= '<span class="input--button__action material-symbols-outlined">cached</span>' . "\n";
+        $select .= '</div>' . "\n";
         $select .= '</div>' . "\n";
         return $select;
     }
